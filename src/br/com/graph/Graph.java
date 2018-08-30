@@ -45,4 +45,11 @@ public class Graph {
         }
     }
     
+    public void graphShow(){
+        for(Integer key: vertices.keySet()){
+            Vertex value = vertices.get(key);
+            System.out.print(key + " ");
+            System.out.println(value);
+        }
+    }
 }
