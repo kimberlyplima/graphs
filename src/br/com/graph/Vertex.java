@@ -5,23 +5,25 @@
  */
 package br.com.graph;
 
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
+
 
 /**
  *
  * @author kimberlyplima
  */
-public class Vertex {
+public class Vertex{
     
-    private String name;
-    private int id;
-    public HashMap<Vertex, Edge> direction;
+    private int vertex;
 
-    public Vertex(String name, int id){
-        this.name = name;
-        this.id = id;
-        this.direction = new HashMap<Vertex, Edge>();
+    public Vertex(int vertex){
+        this.vertex = vertex;
     }
-        
+
+    /**
+     * @return the name
+     */
+    public int getValue() {
+        return this.vertex;
+    }  
 }

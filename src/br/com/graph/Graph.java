@@ -5,51 +5,52 @@
  */
 package br.com.graph;
 
-import java.util.HashMap;
-
+import java.util.*;
 
 /**
  *
  * @author kimberlyplima
  */
-public class Graph {
-    
-    int next_id = 0;
-    public HashMap<Integer, Vertex> vertices;
+public class Graph{
+    private List<LinkedList> graph;
+    private LinkedList<Vertex> adjList;
     
     public Graph(){
-        this.vertices = new HashMap<Integer, Vertex>();
-    }
-    
-    public void addVertex(String name){
-        Vertex vertex = new Vertex(name, next_id);
-        vertices.put(next_id++, vertex);
-    }
-    
-    public Vertex getVertex(int id){
-        if(!vertices.containsKey(id)){
-            return null;
-        }
-        return vertices.get(id);
-    }
-    
-    public void addAdjacency(Vertex inicial, Vertex dest, int cost){
-        Edge edge = new Edge(cost);
+        graph = new LinkedList();
+        adjList = new LinkedList();
         
-        if(!inicial.direction.containsKey(dest)){
-            inicial.direction.put(dest, edge);
+        graph.add(adjList);
+    }
+    
+    public void addArc(Vertex inicialVertex, Vertex finalVertex){
+        if(!graph.contains(inicialVertex)){
+            adjList.add(inicialVertex);
+            adjList.add(finalVertex);
+            graph.add(adjList);
         }
         
-        if(!dest.direction.containsKey(inicial)){
-            dest.direction.put(inicial, edge);
-        }
+        int index = graph.indexOf(adjList);
+        graph.get(index).add(finalVertex);
     }
     
-    public void graphShow(){
-        for(Integer key: vertices.keySet()){
-            Vertex value = vertices.get(key);
-            System.out.print(key + " ");
-            System.out.println(value);
+    public int sizeGraph(){
+        Iterator<LinkedList> i = graph.iterator();
+        int size = 0;
+        
+        while(i.hasNext()){
+            size += i.next().size();
+        }
+        
+        return size;
+    }
+    
+    public void showGraph(){
+        for(LinkedList i: graph){
+            Iterator<Vertex> j = i.iterator();
+            
+            while(j.hasNext()){
+                System.out.print(j.next().getValue() + " ");
+            }
         }
     }
 }
