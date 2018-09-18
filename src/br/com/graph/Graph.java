@@ -12,45 +12,48 @@ import java.util.*;
  * @author kimberlyplima
  */
 public class Graph{
-    private List<LinkedList> graph;
-    private LinkedList<Vertex> adjList;
+    private HashMap<String, LinkedList> graph;
+    private LinkedList<String> adj;
     
     public Graph(){
-        graph = new LinkedList();
-        adjList = new LinkedList();
-        
-        graph.add(adjList);
+        graph = new HashMap();
     }
     
-    public void addArc(Vertex inicialVertex, Vertex finalVertex){
-        if(!graph.contains(inicialVertex)){
-            adjList.add(inicialVertex);
-            adjList.add(finalVertex);
-            graph.add(adjList);
-        }
-        
-        int index = graph.indexOf(adjList);
-        graph.get(index).add(finalVertex);
+    public void addNewEdge(String inicialVertex, String finalVertex){        
+        if(!graph.containsKey(inicialVertex)){            
+            adj = new LinkedList();
+            this.adj.add(finalVertex);
+            graph.put(inicialVertex, this.adj);
+        } else graph.get(inicialVertex).add(finalVertex);
+    }
+    
+    public LinkedList<String> returnAdj(String key){
+        LinkedList<String> adj = new LinkedList();
+            
+            if(graph.containsKey(key)){
+                adj = graph.get(key);
+                return adj;
+            } else return null;
     }
     
     public int sizeGraph(){
-        Iterator<LinkedList> i = graph.iterator();
-        int size = 0;
+        int sizeGraph;
+        sizeGraph = 0;
+        
+        Iterator<LinkedList> i = graph.values().iterator();
         
         while(i.hasNext()){
-            size += i.next().size();
+            sizeGraph += i.next().size();
         }
         
-        return size;
+        return sizeGraph;
     }
     
     public void showGraph(){
-        for(LinkedList i: graph){
-            Iterator<Vertex> j = i.iterator();
-            
-            while(j.hasNext()){
-                System.out.print(j.next().getValue() + " ");
-            }
+        Iterator<Map.Entry<String, LinkedList>> i = graph.entrySet().iterator();
+        
+        while(i.hasNext()){
+            System.out.println(i.next());
         }
     }
 }
