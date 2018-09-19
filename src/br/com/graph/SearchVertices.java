@@ -15,43 +15,41 @@ public class SearchVertices {
     QueueGraph queue;
     BuildGraph c = new BuildGraph();
     Graph graph = c.buildGraph();
-    int size;
 
     public SearchVertices(String inicialVertex){
-        size = graph.sizeGraph();
+        int size = graph.sizeGraph();
         boolean[] visited = new boolean[size];
-        int[] distanceCities = new int[size-1];
+
+        int[] distanceCities = new int[size];
         int level = 0;
         int cont = 0;
         String v;
         
         Arrays.fill(distanceCities, 0);
         Arrays.fill(visited, Boolean.FALSE);
+        
         visited[Integer.parseInt(inicialVertex)] = true;
         
         queue = new QueueGraph();
         queue.enqueue(inicialVertex);
         
         while(!queue.isEmpty()){
-            distanceCities[level] = cont;
-            cont = 0;
-            
             v = queue.getVertex();
             queue.dequeue();
             
-            if(graph.returnAdj(v) != null){
-                Iterator<String> i = graph.returnAdj(v).iterator();
-                
-                while(i.hasNext()){
-                cont++;
+            LinkedList adj = graph.returnAdj(v);
+            Iterator<String> i = graph.returnAdj(v).iterator();
+            
+            distanceCities[Integer.parseInt(v)] = adj.size();
+
+            while(i.hasNext()){
                 String next = i.next();
-                int counter = Integer.parseInt(next);
-                
-                    if(visited[counter] == false){
-                        visited[counter] = true;
+                int position = Integer.parseInt(next);
+
+                    if(visited[position] == false){
+                        visited[position] = true;
                         queue.enqueue(next);
                     }
-                } level++;
             }
         }
         

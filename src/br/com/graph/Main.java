@@ -12,25 +12,7 @@ package br.com.graph;
 public class Main {
     
     public static void main(String[] args){
-        SearchVertices sc = new SearchVertices("1");
-        
-        //System.out.println(sc.graph.sizeGraph());
-        
-        /*OpenFile t = new OpenFile();
-        String principalCity;
-        Graph g = new Graph();
-        
-        for(int i = 0; i < t.OpenFile().size(); i++){
-            String index = Integer.toString(i);
-            String value = t.OpenFile().get(i).toString();
-
-            if(index.equals(value)){
-                principalCity = index;
-                g.addNewEdge(value, index);
-            } else g.addNewEdge(value, index); 
-        }*/
-        
-        
+        SearchVertices sc = new SearchVertices("1");        
     }
     
 }

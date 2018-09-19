@@ -14,6 +14,7 @@ import java.util.*;
 public class Graph{
     private HashMap<String, LinkedList> graph;
     private LinkedList<String> adj;
+    private int size;
     
     public Graph(){
         graph = new HashMap();
@@ -37,14 +38,7 @@ public class Graph{
     }
     
     public int sizeGraph(){
-        int sizeGraph;
-        sizeGraph = 0;
-        
-        Iterator<LinkedList> i = graph.values().iterator();
-        
-        while(i.hasNext()){
-            sizeGraph += i.next().size();
-        }
+        int sizeGraph = graph.size();
         
         return sizeGraph;
     }
@@ -56,4 +50,14 @@ public class Graph{
             System.out.println(i.next());
         }
     }
+
+    /*public void setSize(int size) {
+        this.size = size;
+    }
+
+    public int getSize() {
+        return size;
+    }*/
+
+    
 }
