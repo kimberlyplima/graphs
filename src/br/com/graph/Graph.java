@@ -1,7 +1,5 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * This is an implementation of a simple graph of integers.
  */
 package br.com.graph;
 
@@ -11,53 +9,56 @@ import java.util.*;
  *
  * @author kimberlyplima
  */
-public class Graph{
-    private HashMap<String, LinkedList> graph;
-    private LinkedList<String> adj;
-    private int size;
+public class Graph {
+    private Map<Integer, LinkedList<Integer>> graph;
     
     public Graph(){
         graph = new HashMap();
     }
     
-    public void addNewEdge(String inicialVertex, String finalVertex){        
-        if(!graph.containsKey(inicialVertex)){            
-            adj = new LinkedList();
-            this.adj.add(finalVertex);
-            graph.put(inicialVertex, this.adj);
+    /*
+    * This method checks if the initial node already exists on the map.
+    *
+    * If the existing maps don't contain the node, a new map is created
+    * adding the inicial given node as the key of the map 
+    * and a null linkedlist as the value. It also adds the final node as an
+    * adjacency of the inicial node.
+    *
+    * If the map contains the inicial given node, the final node is added as an 
+    * adjacency of it (it's added on the linkedlist).
+    */
+    public void buildGraph(Integer inicialVertex, Integer finalVertex){
+        if(!graph.containsKey(inicialVertex)){
+            graph.put(inicialVertex, new LinkedList());
+            graph.get(inicialVertex).add(finalVertex);
         } else graph.get(inicialVertex).add(finalVertex);
     }
     
-    public LinkedList<String> returnAdj(String key){
-        LinkedList<String> adj = new LinkedList();
-            
-            if(graph.containsKey(key)){
-                adj = graph.get(key);
-                return adj;
-            } else return null;
-    }
-    
-    public int sizeGraph(){
-        int sizeGraph = graph.size();
-        
-        return sizeGraph;
-    }
-    
+    /*
+    * Prints the entire map.
+    */
     public void showGraph(){
-        Iterator<Map.Entry<String, LinkedList>> i = graph.entrySet().iterator();
+        Iterator<Map.Entry<Integer, LinkedList<Integer>>> i;
+        i = graph.entrySet().iterator();
         
         while(i.hasNext()){
             System.out.println(i.next());
         }
     }
-
-    /*public void setSize(int size) {
-        this.size = size;
+    
+    /*
+    * @return an integer containing the number of keys in this map.
+    */
+    public Integer sizeGraph(){
+        return graph.size();
     }
 
-    public int getSize() {
-        return size;
-    }*/
-
-    
+    /**
+     * @return the adjacencies of the given node.
+     */
+    public LinkedList<Integer> getAdjList(Integer vertex) {
+        if(graph.get(vertex).contains(null)){
+            return null;
+        } else return graph.get(vertex);
+    }
 }

@@ -5,6 +5,8 @@
  */
 package br.com.graph;
 
+import java.util.*;
+
 /**
  *
  * @author kimberlyplima
@@ -12,7 +14,25 @@ package br.com.graph;
 public class Main {
     
     public static void main(String[] args){
-        SearchVertices sc = new SearchVertices("1");        
+        OpenFile t = new OpenFile();
+        Graph g = new Graph();
+        int size = t.OpenFile().size();
+        int mainCity = 0;
+        
+        for(int i = 0; i < t.OpenFile().size(); i++){
+            int index = i;
+            int value = Integer.parseInt(t.OpenFile().get(i).toString());
+            
+            if(index != value){
+                g.buildGraph(index, value);
+                g.buildGraph(value, index);
+            } else mainCity = index;
+
+        }
+        
+        g.showGraph();
+        
+        Bfs search = new Bfs(g, mainCity);
     }
     
 }
