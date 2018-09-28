@@ -19,8 +19,8 @@ public class Graph {
     /*
     * This method checks if the initial node already exists on the map.
     *
-    * If the existing maps don't contain the node, a new map is created
-    * adding the inicial given node as the key of the map 
+    * If the existing mappings don't contain the node, a new mapping is created
+    * adding the inicial given node as the key of the mapping
     * and a null linkedlist as the value. It also adds the final node as an
     * adjacency of the inicial node.
     *

@@ -1,6 +1,8 @@
 /*
- * This is a simple implementation of the BFS search and it returns a 
- * visitation vector.
+ * In addition to the BFS search implementation, this class also counts
+ * the number of nodes at a given distance and includes these values in a
+ * map, where the key is the distance and the values are the number of nodes at
+ * that distance.
  */
 package br.com.graph;
 
@@ -44,10 +46,13 @@ public class Bfs {
             }
         }
         
+        /*
+         * In this loop the map is filled with the distances and the 
+         * correspondent number of nodes.
+         * It is also filled with zero on those "distances" which don't exist.
+         */
         for(int j = 0; j < distance.length; j++){
             int cont = 0;
-            
-            //numCitiesDist.put(0, 0);
             
             if(!numCitiesDist.containsKey(distance[j])){
                 if(distance[j] != 0){
